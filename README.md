@@ -110,10 +110,8 @@ Open `frontend/frontend.html` directly in your browser or serve it using a live 
 - `POST /api/groups/:id/expenses` - Add an expense to a group
 - `POST /api/groups/:id/settlements` - Add a settlement record to a group
 
-## Contributing
-
-Contributions, issues, and feature requests are welcome. Feel free to fork the repository and submit pull requests.
 
 ## License
 
 This project is licensed under the MIT License.
+
