@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Budget Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: auto;
+            padding: 0 20px;
+            background: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        form {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input[type=text],
+        input[type=number],
+        input[type=date],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .dashboard {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .dashboard div {
+            background: white;
+            flex: 1;
+            margin: 0 10px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-container {
+            background: white;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .group-management {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Personal Budget Tracker</h1>
+    </header>
+
+    <section>
+        <form id="transactionForm">
+            <h2>Add Transaction</h2>
+            <div class="form-group">
+                <label for="type">Type</label>
+                <select id="type" required>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <input type="text" id="category" placeholder="e.g., Food, Salary, Transport" required />
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" id="amount" placeholder="Enter amount" min="0" step="0.01" required />
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" required />
+            </div>
+            <div class="form-group">
+                <label for="notes">Notes (optional)</label>
+                <textarea id="notes" rows="2" placeholder="Notes..."></textarea>
+            </div>
+            <button type="submit">Add Transaction</button>
+        </form>
+    </section>
+
+    <section class="dashboard">
+        <div>
+            <h3>Total Income</h3>
+            <p id="totalIncome">$0.00</p>
+        </div>
+        <div>
+            <h3>Total Expense</h3>
+            <p id="totalExpense">$0.00</p>
+        </div>
+        <div>
+            <h3>Balance</h3>
+            <p id="balance">$0.00</p>
+        </div>
+    </section>
+
+    <section class="chart-container">
+        <canvas id="incomeExpenseChart"></canvas>
+    </section>
+
+    <section>
+        <h2>Transactions</h2>
+        <div>
+            <input type="text" id="searchInput" placeholder="Search transactions..."
+                style="width: 100%; padding: 8px; margin-bottom: 10px;" />
+        </div>
+        <table id="transactionsTable">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="group-management">
+        <h2>Group Expense Management </h2>
+        <form id="groupForm">
+            <div class="form-group">
+                <label for="groupName">Group Name</label>
+                <input type="text" id="groupName" placeholder="Enter group name" required />
+            </div>
+            <div class="form-group">
+                <label for="participants">Participants (comma separated emails)</label>
+                <input type="text" id="participants" placeholder="email1@example.com, email2@example.com" required />
+            </div>
+            <button type="submit">Create Group</button>
+        </form>
+        <div id="groupsList"></div>
+    </section>
+
+    <section id="groupDetailsSection"></section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
